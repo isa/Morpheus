@@ -113,8 +113,11 @@ def train(language_name, train_data_path, val_data_path, use_min_edit_operation_
         decoder_morph_tags.train()
 
         # LR Schedule
+        encoder_optimizer.step()
         encoder_scheduler.step()
+        decoder_lemma_optimizer.step()
         decoder_lemma_scheduler.step()
+        decoder_morph_tags_optimizer.step()
         decoder_morph_tags_scheduler.step()
 
         for x, y1, y2, y3 in tqdm(train_loader, desc='Training'):
